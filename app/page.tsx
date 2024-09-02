@@ -1,113 +1,169 @@
+import { useState, useEffect } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setOffset((prevOffset) => (prevOffset + 1) % 200);
+    }, 50);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen bg-[#F9F9F9] p-6">
+      <nav className="flex items-center justify-between mb-8">
+        <div className="flex items-center space-x-2">
+          <svg
+            className=" h-6 w-6 text-[#00A211]"
+            fill="none"
+            height="24"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            By{" "}
+            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+          </svg>
+          <span className="text-xl font-bold">
+            Ecomflow
+          </span>
+        </div>
+        <div className="flex items-center space-x-4">
+          <Link
+            className="text-sm font-medium hover:underline"
+            href="#"
+          >
+            Supply-Chain
+          </Link>
+          <Link
+            className="text-sm font-medium hover:underline"
+            href="#"
+          >
+            Pricing & Benefits
+          </Link>
+          <Link
+            className="text-sm font-medium hover:underline"
+            href="#"
+          >
+            FAQ
+          </Link>
+          <Button className="bg-[#00A211] text-white hover:bg-[#008E0F]">
+            Work with us
+          </Button>
+        </div>
+      </nav>
+      <Card className="p-8 mb-12">
+        <div className="flex items-start justify-between">
+          <div className="max-w-2xl">
+            <div className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm mb-4">
+              Your trusted 3PL partner for business with
+              China
+            </div>
+            <h1 className="text-4xl font-bold mb-4">
+              The future of supply-chain has arrived.
+            </h1>
+            <p className="text-gray-600 mb-6">
+              Ecomflow is third-party logistics reinvented
+              with a dedicated, brand-friendly approach.
+              With 2 warehouse locations in Mainland China,
+              Ecomflow is offering the best of two worlds.
+              All the benefits of China fulfilment, without
+              the downside.
+            </p>
+            <div className="flex space-x-4">
+              <Button className="bg-[#00A211] text-white hover:bg-[#008E0F]">
+                Work with us
+              </Button>
+              <Button variant="outline">
+                Pricing & benefits
+              </Button>
+            </div>
+          </div>
+          <div className="flex flex-col items-end space-y-4">
+            <Card className="bg-green-900 text-white p-4">
+              <h3 className="text-3xl font-bold">x4.3</h3>
+              <p>Better cash flow</p>
+            </Card>
+            <Card className="bg-white p-4">
+              <h3 className="text-3xl font-bold text-green-500">
+                65+
+              </h3>
+              <p>Countries</p>
+            </Card>
+            <Card className="bg-white p-4">
+              <h3 className="text-3xl font-bold text-green-500">
+                30%
+              </h3>
+              <p>Margin improvement</p>
+              <p className="text-sm text-green-500">
+                ↑ 34% vs last year
+              </p>
+            </Card>
+          </div>
+        </div>
+        <div className="flex justify-between mt-8">
+          <div>
+            <h3 className="text-4xl font-bold">50+</h3>
+            <p>Trusted by Brands</p>
+          </div>
+          <div>
+            <h3 className="text-4xl font-bold">35,000+</h3>
+            <p>Parcels shipped per day</p>
+          </div>
+          <div>
+            <h3 className="text-4xl font-bold">99.5%</h3>
+            <p>Successful deliveries</p>
+          </div>
+        </div>
+      </Card>
+      <div className="text-center mb-8">
+        <h2 className="text-2xl font-semibold mb-4">
+          Ecomflow is trusted by{" "}
+          <span className="text-[#00A211]">
+            50+ top brands
+          </span>{" "}
+          worldwide.
+        </h2>
+      </div>
+      <div className="relative h-20 overflow-hidden">
+        <div
+          className="flex space-x-8 absolute"
+          style={{
+            transform: `translateX(-${offset}px)`,
+            width: "200%",
+          }}
+        >
+          {[...Array(10)].map((_, i) => (
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+              key={i}
+              src={`/placeholder.svg?height=80&width=160`}
+              alt={`Logo ${i + 1}`}
+              width={160}
+              height={80}
+              className="object-contain"
             />
-          </a>
+          ))}
+          {[...Array(10)].map((_, i) => (
+            <Image
+              key={i + 10}
+              src={`/placeholder.svg?height=80&width=160`}
+              alt={`Logo ${i + 11}`}
+              width={160}
+              height={80}
+              className="object-contain"
+            />
+          ))}
         </div>
       </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }
