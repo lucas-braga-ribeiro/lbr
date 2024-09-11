@@ -225,7 +225,6 @@ export default function LandingPage() {
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <div className="w-6 h-6 bg-black rounded-full mr-4 mt-1"></div>
                 <div>
                   <h4 className="font-semibold mb-2">
                     Full pages Website design
